@@ -19,21 +19,33 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-    
-    
+
+    <style>
+        .inter{
+            font-family: "Inter", sans-serif;
+            font-weight: normal;
+        }
+    </style>
+
 </head>
 
-<body class="container mx-auto">
+<body class="container mx-auto inter">
     <header>
         <nav class="py-5 flex items-center justify-between border-b-[1px] border-[#17171733]">
+
+            <!-- logo container  -->
             <div>
                 <img src="assets/Logo.png" alt="">
             </div>
+
+            <!-- sort button container  -->
             <div>
                 <button class="btn hover:bg-red-500 hover:text-white">
                     Sort by view
                 </button>
             </div>
+
+            <!-- blog button container  -->
             <div>
                 <button class="btn bg-red-500 text-white hover:bg-white hover:text-black">
                     Blog
@@ -41,7 +53,49 @@
             </div>
         </nav>
     </header>
-    <main></main>
+    <main>
+
+        <!-- button container  -->
+        <div class="flex justify-center gap-5 py-7">
+            <button class="btn hover:bg-red-500 hover:text-white">
+                All
+            </button>
+        </div>
+
+        <!-- videos container  -->
+        <div class="grid grid-cols-4 gap-6">
+
+            <!-- card template  -->
+            <div class="card bg-base-100 shadow-sm">
+                <!-- thumbnail  -->
+                <figure>
+                    <img class="rounded-lg"
+                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+                </figure>
+
+                <!-- video details  -->
+                <div class="px-2 my-5 flex gap-4">
+                    <!-- avatar container  -->
+                    <div>
+                        <!-- avatar  -->
+                        <div class="avatar">
+                            <div class="w-10 rounded-full">
+                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- detail container  -->
+                    <div>
+                        <h1 class="text-[#171717] font-bold">Building a Winning UX Strategy Using the Kano Model</h1>
+                        <h2 class="flex gap-2 text-[#171717B3] text-sm">Awlad Hossain <img class="w-5"
+                                src="https://img.icons8.com/?size=48&id=98A4yZTt9abw&format=png" alt=""></h2>
+                        <p class="text-[#171717B3] text-sm">91K views</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     <footer></footer>
 </body>
 
