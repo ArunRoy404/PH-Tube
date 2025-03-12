@@ -61,8 +61,6 @@
                     Sort by view
                 </button>
             </div>
-
-
         </nav>
     </header>
     <main class="mb-12">
@@ -96,8 +94,25 @@
             </div>
         </div>
 
+        <!-- video details modal  -->
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button>  -->
+        <dialog id="video_detail_modal" class="modal">
+            <div class="modal-box">
 
-        
+                <!-- video detail  -->
+                <div id="detail-body" class="card bg-base-100 image-full shadow-sm">
+                </div>
+
+                <!-- modal action  -->
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
     </main>
     <footer></footer>
 
