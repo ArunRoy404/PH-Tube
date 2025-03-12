@@ -124,6 +124,7 @@ document.getElementById('search').addEventListener('keyup', (e) => {
 })
 
 
+
 const showVideoModal = (data) => {
     const detailBody = document.getElementById('detail-body')
     detailBody.innerHTML = `
@@ -133,7 +134,7 @@ const showVideoModal = (data) => {
         <div class="card-body">
             <h2 class="card-title">${data.title}</h2>
             <p>${data.description}</p>
-            <div class="px-2 my-5 flex gap-4">
+            <div class="px-2 mt-5 flex items-center gap-4">
                 <!-- avatar container  -->
                 <div>
                     <!-- avatar  -->
@@ -152,9 +153,9 @@ const showVideoModal = (data) => {
             </div>
         </div>
     `
-
     document.getElementById('video_detail_modal').showModal()
 }
+
 
 const loadVideoDetail = (id) => {
     const url = `https://openapi.programming-hero.com/api/phero-tube/video/${id}`
