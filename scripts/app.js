@@ -41,6 +41,7 @@ const loadVideo = (videos) => {
 
     const videoContainer = document.getElementById('video-container')
     videoContainer.innerHTML = ""
+    console.log(videos[0])
     videos.forEach(video => {
         videoContainer.innerHTML += `
         <div class="card bg-base-100 shadow-sm">
@@ -65,8 +66,8 @@ const loadVideo = (videos) => {
                 <!-- detail container  -->
                 <div>
                     <h1 class="text-[#171717] font-bold">${video.title}</h1>
-                    <h2 class="flex gap-2 text-[#171717B3] text-sm">${video.authors[0].profile_name} <img class="w-5 h-5"
-                            src="https://img.icons8.com/?size=48&id=98A4yZTt9abw&format=png" alt=""></h2>
+                    <h2 class="flex gap-2 text-[#171717B3] text-sm">${video.authors[0].profile_name} 
+                    ${(video.authors[0].verified) ?`<img class="w-5 h-5" src="https://img.icons8.com/?size=48&id=98A4yZTt9abw&format=png" alt="">`:``}</h2>
                     <p class="text-[#171717B3] text-sm">${video.others.views} views</p>
                 </div>
             </div>
