@@ -8,7 +8,7 @@ const loadCategoryButtons = (categories) => {
     categories.forEach(cat => {
         // console.log(cat)
         btnContainer.innerHTML += `
-        <button onclick=handleCatBtn(${cat.category_id}) id='btn-${cat.category_id}' class="btn hover:bg-red-500 hover:text-white">
+        <button onclick=handleCatBtn(${cat.category_id}) id='cat-${cat.category_id}' class="btn hover:bg-red-500 hover:text-white">
             ${cat.category}
         </button>
         `
@@ -74,13 +74,13 @@ const removeActiveAll = () =>{
 }
 
 const selectActiveBtn = (cat) =>{
-    const btn = document.getElementById(`btn-${cat}`)
+    const btn = document.getElementById(`cat-${cat}`)
     btn.classList.add('active-btn')
 }
 
 const handleCatBtn = (cat) => {
     removeActiveAll()
-    if(cat === "all-cat"){
+    if(cat === "all"){
         getVideo()
     }else{
         getCategoryVideo(cat)
@@ -89,4 +89,4 @@ const handleCatBtn = (cat) => {
 }
 
 getCategory()
-handleCatBtn("all-cat")
+handleCatBtn("all")
