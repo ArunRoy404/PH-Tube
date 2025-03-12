@@ -16,10 +16,10 @@ const loadCategoryButtons = (categories) => {
     // console.log(btnContainer)
 }
 
-const getVideo = () => {
-    fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
-        .then(r => r.json())
-        .then(data => loadVideo(data.videos))
+const getVideo = (text='') =>{
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${text}`)
+    .then(r => r.json())
+    .then(data => loadVideo(data.videos))
 }
 
 const getCategoryVideo = (cat) =>{
@@ -28,13 +28,6 @@ const getCategoryVideo = (cat) =>{
         .then(r => r.json())
         .then(data => loadVideo(data.category))
 }
-
-const getSearchedVideo = (text) =>{
-    fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${text}`)
-    .then(r => r.json())
-    .then(data => loadVideo(data.videos))
-}
-
 const showError = () =>{
     document.getElementById('no-video')
     .classList.remove('hidden')
@@ -86,16 +79,15 @@ const loadVideo = (videos) => {
 }
 
 
+
 const removeActiveAll = () =>{
     const activeBtn = document.querySelectorAll('.active-btn')
     activeBtn.forEach(btn => btn.classList.remove('active-btn'))
 }
-
 const selectActiveBtn = (cat) =>{
     const btn = document.getElementById(`cat-${cat}`)
     btn.classList.add('active-btn')
 }
-
 const handleCatBtn = (cat) => {
     removeActiveAll()
     if(cat === "all"){
@@ -106,9 +98,10 @@ const handleCatBtn = (cat) => {
     selectActiveBtn(cat)
 }
 
+
 document.getElementById('search').addEventListener('keyup',(e)=>{
     const searchText = e.target.value
-    getSearchedVideo(searchText)
+    getVideo(searchText)
 })
 
 getCategory()
