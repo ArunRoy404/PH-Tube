@@ -1,3 +1,7 @@
+// sorting flag 
+let isSort = false
+
+// fetch category for buttons 
 const getCategory = () => {
     fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
         .then(r => r.json())
@@ -16,28 +20,15 @@ const loadCategoryButtons = (categories) => {
     // console.log(btnContainer)
 }
 
+// loader 
 const showLoader = () => {
     document.getElementById('loader').classList.remove('hidden')
 }
-
 const hideLoader = () => {
     document.getElementById('loader').classList.add('hidden')
 }
 
-const getVideo = (text = '') => {
-    showLoader()
-    fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${text}`)
-        .then(r => r.json())
-        .then(data => loadVideo(data.videos))
-}
-
-const getCategoryVideo = (cat) => {
-    showLoader()
-    const url = `https://openapi.programming-hero.com/api/phero-tube/category/${cat}`
-    fetch(url)
-        .then(r => r.json())
-        .then(data => loadVideo(data.category))
-}
+// error page 
 const showError = () => {
     document.getElementById('no-video')
         .classList.remove('hidden')
@@ -46,13 +37,46 @@ const hideError = () => {
     document.getElementById('no-video')
         .classList.add('hidden')
 }
+
+// fetch video by search text 
+const getVideo = (text = '') => {
+    showLoader()
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${text}`)
+        .then(r => r.json())
+        .then(data => loadVideo(data.videos))
+}
+
+// fetch video by category 
+const getCategoryVideo = (cat) => {
+    showLoader()
+    const url = `https://openapi.programming-hero.com/api/phero-tube/category/${cat}`
+    fetch(url)
+        .then(r => r.json())
+        .then(data => loadVideo(data.category))
+}
+
+// load video function 
 const loadVideo = (videos) => {
     hideLoader()
+
+    // error for no video  
     if (videos.length === 0) {
         showError()
     } else {
         hideError()
     }
+
+    // sort in descending order 
+    if (isSort) {
+        videos.sort((a, b) => {
+            x = parseFloat(a.others.views.slice(0, -1))
+            y = parseFloat(b.others.views.slice(0, -1))
+            if (x > y) return -1
+            if (x < y) return 1
+            return 0
+        })
+    }
+
     const videoContainer = document.getElementById('video-container')
     videoContainer.innerHTML = ""
     videos.forEach(video => {
@@ -95,16 +119,17 @@ const loadVideo = (videos) => {
     })
 }
 
-
-
+// active category button that have been clicked 
 const removeActiveAll = () => {
-    const activeBtn = document.querySelectorAll('.active-btn')
+    const activeBtn = document.querySelectorAll('#cat-button-container .active-btn')
     activeBtn.forEach(btn => btn.classList.remove('active-btn'))
 }
 const selectActiveBtn = (cat) => {
     const btn = document.getElementById(`cat-${cat}`)
     btn.classList.add('active-btn')
 }
+
+// on click category button 
 const handleCatBtn = (cat) => {
     removeActiveAll()
     if (cat === "all") {
@@ -116,7 +141,7 @@ const handleCatBtn = (cat) => {
 }
 
 
-
+// fetch video by search field 
 document.getElementById('search').addEventListener('keyup', (e) => {
     removeActiveAll()
     const searchText = e.target.value
@@ -124,7 +149,7 @@ document.getElementById('search').addEventListener('keyup', (e) => {
 })
 
 
-
+// show video detail 
 const showVideoModal = (data) => {
     const detailBody = document.getElementById('detail-body')
     detailBody.innerHTML = `
@@ -157,6 +182,7 @@ const showVideoModal = (data) => {
 }
 
 
+// fetch video detail 
 const loadVideoDetail = (id) => {
     const url = `https://openapi.programming-hero.com/api/phero-tube/video/${id}`
     fetch(url)
@@ -164,6 +190,42 @@ const loadVideoDetail = (id) => {
         .then(data => showVideoModal(data.video))
 }
 
+// sorting
+const sortByView = () => {
+    isSort = !isSort
+    if(isSort){
+        document.getElementById('sort-btn').classList.add('active-btn')
+    }else{
+        document.getElementById('sort-btn').classList.remove('active-btn')
+    }
 
+
+    // realtime sorting 
+    const activeCategory = document.querySelector('#cat-button-container .active-btn').id.split('-')[1]
+    handleCatBtn(activeCategory)
+}
+
+
+// initial category and video loading 
 getCategory()
 handleCatBtn("all")
+
+
+
+// sorting
+// fetch('https://openapi.programming-hero.com/api/phero-tube/videos?title=')
+// .then(r => r.json())
+// .then(data => {
+//     console.log(data.videos[0].others.views)
+//     const videos = data.videos
+//     videos.sort((a,b)=>{
+//         x = parseFloat(a.others.views.slice(0,-1))
+//         y = parseFloat(b.others.views.slice(0,-1))
+//         if(x<y) return -1
+//         if(x>y) return 1
+//         return 0
+//     })
+//     for(video of videos){
+//         console.log(video)
+//     }
+// })
