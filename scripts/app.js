@@ -30,9 +30,17 @@ const getCategoryVideo = (cat) =>{
 }
 
 const loadVideo = (videos) => {
+    if(videos.length == 0){
+        const noVideoBanner = document.getElementById('no-video')
+        .classList.remove('hidden')
+    }else{
+        const noVideoBanner = document.getElementById('no-video')
+        .classList.add('hidden')
+    }
+
+
     const videoContainer = document.getElementById('video-container')
     videoContainer.innerHTML = ""
-
     videos.forEach(video => {
         videoContainer.innerHTML += `
         <div class="card bg-base-100 shadow-sm">
