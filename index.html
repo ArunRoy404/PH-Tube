@@ -25,6 +25,10 @@
             font-family: "Inter", sans-serif;
             font-weight: normal;
         }
+        .active-btn{
+            background-color: #ef4444;
+            color: white;
+        }
     </style>
 
 </head>
@@ -57,7 +61,7 @@
 
         <!-- button container  -->
         <div id="cat-button-container" class="flex justify-center gap-5 py-7">
-            <button id="all-cat" class="btn hover:bg-red-500 hover:text-white">
+            <button onclick="handleCatBtn('all-cat')" id="btn-all-cat" class="btn hover:bg-red-500 hover:text-white">
                 All
             </button>
         </div>

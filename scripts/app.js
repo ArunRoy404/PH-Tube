@@ -8,7 +8,7 @@ const loadCategoryButtons = (categories) => {
     categories.forEach(cat => {
         // console.log(cat)
         btnContainer.innerHTML += `
-        <button id='btn-${cat.category_id}' class="btn hover:bg-red-500 hover:text-white">
+        <button onclick=handleCatBtn(${cat.category_id}) id='btn-${cat.category_id}' class="btn hover:bg-red-500 hover:text-white">
             ${cat.category}
         </button>
         `
@@ -22,9 +22,17 @@ const getVideo = () => {
         .then(data => loadVideo(data.videos))
 }
 
+const getCategoryVideo = (cat) =>{
+    const url = `https://openapi.programming-hero.com/api/phero-tube/category/${cat}`
+    fetch(url)
+        .then(r => r.json())
+        .then(data => loadVideo(data.category))
+}
+
 const loadVideo = (videos) => {
     const videoContainer = document.getElementById('video-container')
-    console.log(videos[0])
+    videoContainer.innerHTML = ""
+
     videos.forEach(video => {
         videoContainer.innerHTML += `
         <div class="card bg-base-100 shadow-sm">
@@ -60,6 +68,25 @@ const loadVideo = (videos) => {
 }
 
 
+const removeActiveAll = () =>{
+    const activeBtn = document.querySelectorAll('.active-btn')
+    activeBtn.forEach(btn => btn.classList.remove('active-btn'))
+}
+
+const selectActiveBtn = (cat) =>{
+    const btn = document.getElementById(`btn-${cat}`)
+    btn.classList.add('active-btn')
+}
+
+const handleCatBtn = (cat) => {
+    removeActiveAll()
+    if(cat === "all-cat"){
+        getVideo()
+    }else{
+        getCategoryVideo(cat)
+    }
+    selectActiveBtn(cat)
+}
 
 getCategory()
-getVideo()
+handleCatBtn("all-cat")
