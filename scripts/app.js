@@ -110,10 +110,13 @@ const handleCatBtn = (cat) => {
 }
 
 
+
 document.getElementById('search').addEventListener('keyup',(e)=>{
+    removeActiveAll()
     const searchText = e.target.value
     getVideo(searchText)
 })
+
 
 getCategory()
 handleCatBtn("all")
