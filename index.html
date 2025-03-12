@@ -37,12 +37,12 @@
         <nav class="py-5 flex items-center justify-between border-b-[1px] border-[#17171733]">
 
             <!-- logo container  -->
-            <div>
-                <img src="assets/Logo.png" alt="">
+            <div >
+                <img class="w-[100px] md:w-auto" src="assets/Logo.png" alt="">
             </div>
 
             <!-- search field  -->
-            <label class="input">
+            <label class="input w-[150px] md:w-auto">
                 <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
                         stroke="currentColor">
@@ -55,7 +55,7 @@
 
             <!-- sort button container  -->
             <div>
-                <button id="sort-btn" onclick="sortByView()" class="btn hover:bg-red-500 hover:text-white">
+                <button id="sort-btn" onclick="sortByView()" class="btn hover:bg-red-500 hover:text-white w-[120px] md:w-auto">
                     Sort by view
                 </button>
             </div>
@@ -78,7 +78,7 @@
         </div>
 
         <!-- videos container  -->
-        <div id="video-container" class="grid grid-cols-4 gap-6">
+        <div id="video-container" class="px-3 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         </div>
 
         <!-- no video container  -->
@@ -113,7 +113,6 @@
         </dialog>
     </main>
     <footer></footer>
-
 
     <script src="scripts/app.js"></script>
 </body>
