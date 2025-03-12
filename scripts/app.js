@@ -16,13 +16,23 @@ const loadCategoryButtons = (categories) => {
     // console.log(btnContainer)
 }
 
+const showLoader = () =>{
+    document.getElementById('loader').classList.remove('hidden')
+}
+
+const hideLoader = () =>{
+    document.getElementById('loader').classList.add('hidden')
+}
+
 const getVideo = (text='') =>{
+    showLoader()
     fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${text}`)
     .then(r => r.json())
     .then(data => loadVideo(data.videos))
 }
 
 const getCategoryVideo = (cat) =>{
+    showLoader()
     const url = `https://openapi.programming-hero.com/api/phero-tube/category/${cat}`
     fetch(url)
         .then(r => r.json())
@@ -37,6 +47,7 @@ const hideError = () =>{
     .classList.add('hidden')
 }
 const loadVideo = (videos) => {
+    hideLoader()
     if(videos.length === 0){
         showError()
     }else{
