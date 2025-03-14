@@ -20,6 +20,11 @@ const loadCategoryButtons = (categories) => {
     // console.log(btnContainer)
 }
 
+const emptyVideoContainer = () => {
+    const videoContainer = document.getElementById('video-container')
+    videoContainer.innerHTML = ''
+}
+
 // loader 
 const showLoader = () => {
     document.getElementById('loader').classList.remove('hidden')
@@ -40,6 +45,8 @@ const hideError = () => {
 
 // fetch video by search text 
 const getVideo = (text = '') => {
+    hideError()
+    emptyVideoContainer()
     showLoader()
     fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${text}`)
         .then(r => r.json())
@@ -48,6 +55,8 @@ const getVideo = (text = '') => {
 
 // fetch video by category 
 const getCategoryVideo = (cat) => {
+    hideError()
+    emptyVideoContainer()
     showLoader()
     const url = `https://openapi.programming-hero.com/api/phero-tube/category/${cat}`
     fetch(url)
@@ -76,9 +85,7 @@ const loadVideo = (videos) => {
             return 0
         })
     }
-
     const videoContainer = document.getElementById('video-container')
-    videoContainer.innerHTML = ""
     videos.forEach(video => {
         videoContainer.innerHTML += `
         <div class="card bg-base-100 shadow-sm">
